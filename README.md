@@ -24,7 +24,7 @@ Jonas Frey, Hermann Blum, Francesco Milano, Roland Siegwart, Cesar Cadena, **Con
 @inproceedings{frey2022traversability,
   author={Jonas Frey and Hermann Blum and Francesco Milano and Roland Siegwart and Cesar Cadena},
   journal={under review: IEEE Robotics and Automation Letters(RA-L},
-  title={Continual Learning of Semantic Segmentation using Complementary 2D-3D Data Representations},
+  title={Continual Adaptation of Semantic Segmentation using Complementary 2D-3D Data Representations},
   year={2022}
 }
 ```
