@@ -1,0 +1,5 @@
+workstation: False
+
+base: /home/work/learning
+labels_generic: /home/work/labels_generated
+scannet: /home/tmpdir/scannet

@@ -1,0 +1,2 @@
+#!/bin/bash
+rsync -r -v --exclude=ucdr.egg-info/* --exclude=.git/* --exclude=*.pyc --exclude=cfg/docker/exports/* --exclude=results/* --exclude=build/* --exclude=.neptune/* $HOME/git/continual_adaptation_ucdr/ $USER@euler:/cluster/home/$USERNAME/continual_adaptation_ucdr

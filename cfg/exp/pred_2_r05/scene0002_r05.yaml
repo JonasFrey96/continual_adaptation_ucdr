@@ -1,0 +1,168 @@
+name: pred2/scene0002_r05
+neptune_project_name: ASL/MT-JonasFrey
+offline_mode: false
+timestamp: false
+weights_restore: true
+checkpoint_restore: false
+checkpoint_load: scannet25k_24h_lr_decay_from_scratch/2021-06-05T14:36:26_scannet25k_24h_lr_decay_from_scratch/task0-epoch=64--step=158340.ckpt
+lr: 0.05
+tag_list:
+- scannet
+- pretrain_25k
+- half_res
+- self_supervised
+supervisor:
+  start_task: 1
+  stop_task: 2
+
+
+meters:
+  train: False
+  val_0: False
+  val_1: False
+  log_val_dataloader_1: [0,49]
+  log_val_dataloader_0: [49]
+
+task_specific_early_stopping:
+  active: false
+  cfg:
+    patience: 2000
+    timelimit_in_min: 150
+    verbose: true
+    max_epoch_count: 50
+lr_scheduler:
+  active: true
+  name: ONE_CYCLE_LR
+  poly_cfg:
+    power: 0.9
+    max_epochs: 2000
+    target_lr: 1.0e-05
+  one_cycle_lr_cfg:
+    pct_start: 0.1
+    final_div_factor: 10
+    div_factor: 10000
+optimizer:
+  name: SGD
+  sgd_cfg:
+    momentum: 0.9
+    weight_decay: 4.0e-05
+trainer:
+  precision: 16
+  accumulate_grad_batches: 1
+  fast_dev_run: false
+  limit_train_batches: 1.0
+  limit_val_batches: 1.0
+  limit_test_batches: 1.0
+  max_epochs: 1000
+  gpus: -1
+  profiler: false
+  num_sanity_val_steps: 0
+  check_val_every_n_epoch: 10
+loader:
+  pin_memory: true
+  batch_size: 8
+  shuffle: true
+  num_workers: 16
+replay:
+  cfg_ensemble:
+    active: true
+    replay_augmentation: true
+    mode: fixed_total_replay_ratio
+    cfg_adaptive:
+      simple: true
+    cfg_simple:
+      ratio_per_task: 0.2
+    cfg_fixed_total_replay_ratio:
+      ratio_replay: 0.5
+    cfg_focus_task_0:
+      ratio_replay_task_0: 0.2
+      ratio_replay_task_1_N: 0.05
+    cfg_individual_simple:
+      probs:
+      - 0.2
+      - 0.05
+      - 0.05
+      - 0.05
+      - 0.05
+      - 0.05
+      - 0.05
+      - 0.05
+      - 0.05
+      - 0.05
+    cfg_individual_ratios:
+      ratio_replay: 0.8
+      importance:
+      - 10
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+  cfg_filling:
+    strategy: random
+    metric_mode: max
+visu:
+  every_n_epochs: 1
+  images:
+    train: 1
+    val: 1
+    test: 1
+model:
+  name: Fast-SCNN
+  input_size:
+  - 320
+  - 640
+  cfg:
+    num_classes: 40
+    aux: false
+    extraction:
+      active: false
+      layer: learn_to_down
+
+loss:
+  aux_label_factor: 1
+  soft_aux_label_factor: 1
+
+task_generator:
+  name: scannet
+  mode: scannet_25k_individual
+  cfg:
+    scannet_25k_individual:
+      number_of_tasks: 1
+      scenes_per_task: 1
+      label_setting: labels_individual_scenes_map_2
+      confidence_aux: 0.1
+      start_scene: 2
+    copy_to_template:
+      output_size:
+      - 320
+      - 640
+      label_setting: default
+
+cb_early_stopping:
+  active: false
+  cfg:
+    monitor: val_loss_epoch
+    patience: 10000
+    strict: true
+    verbose: true
+    mode: min
+    min_delta: -0.0001
+
+cb_checkpoint:
+  active: true
+  nameing: 1
+  cfg:
+    verbose: true
+    monitor: train_loss
+    mode: min
+    save_last: true
+    save_top_k: 1
+
+lr_monitor:
+  cfg:
+    logging_interval: step
