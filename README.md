@@ -17,6 +17,38 @@
 
 # Overview
 
+📦continual_adaptation_ucdr  
+ ┣ 📂cfg                    # configuration
+ ┃ ┣ 📂conda                   # conda enviornment file 
+ ┃ ┣ 📂dataset                 # dataset configuration
+ ┃ ┣ 📂docker                  # docker files
+ ┃ ┣ 📂env                     # enviornment configuration
+ ┃ ┣ 📂eval                    # evaluation configuration
+ ┃ ┣ 📂exp                     # network training experiments configuration
+ ┃ ┗ 📂generate                # checkpoint to lables
+ ┣ 📂docs                   # images for readme
+ ┣ 📂results                # empty result folder
+ ┃ ┣ 📂evals
+ ┃ ┣ 📂labels_generated
+ ┃ ┣ 📂learning
+ ┣ 📂scripts
+ ┃ ┣ 📜eval_model.py           # evaluation of model checkpoint
+ ┃ ┣ 📜eval_pseudo_labels.py   # evaluation of folder containing pseudo labels
+ ┃ ┣ 📜generate.py             # model checkpoint to lables
+ ┃ ┣ 📜raycast_folder.py       # raycast mesh exported from kimera semantics
+ ┃ ┗ 📜train.py                # adapt network 
+ ┣ 📂ucdr                   # learning code
+ ┃ ┣ 📂callbacks
+ ┃ ┣ 📂datasets
+ ┃ ┣ 📂kimera_semantics
+ ┃ ┣ 📂lightning
+ ┃ ┣ 📂loss
+ ┃ ┣ 📂models
+ ┃ ┣ 📂pseudo_label
+ ┃ ┣ 📂task
+ ┃ ┣ 📂utils
+ ┃ ┣ 📂visu
+
 # Citation
 
 Jonas Frey, Hermann Blum, Francesco Milano, Roland Siegwart, Cesar Cadena, **Continual Learning of Semantic Segmentation using Complementary 2D-3D Data Representations**”, in *IEEE Robotics and Automation Letters(RA-L)*, 2022.
@@ -87,7 +119,7 @@ scannet: /path_to/scannet # (global path)
 ### [exp] Experiment
 In the experiment folder all experiments to reproduce the results within the paper are provided. 
 Pass the relative path to the defined experiment yaml-file to the `scripts/train.py` to start training.
-You may want to adapt the `neptune_project_name` to log directly to your neptune.ai account. 
+You may want to adapt the `neptune_project_name` to log directly to your [neptune.ai](https://neptune.ai/) account. 
 
 ### [eval] Evaluation
 Pass the relative path to the defined evaluation yaml-file to the `scripts/eval.py` to start evaluation.
