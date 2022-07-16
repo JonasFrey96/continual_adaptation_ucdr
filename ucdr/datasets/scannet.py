@@ -101,6 +101,7 @@ class ScanNet(Dataset):
         global_idx = self.global_to_local_idx[index]
 
         # Read Image and Label
+
         label, _ = self._label_loader.get(self.label_pths[global_idx])
         label = torch.from_numpy(label).type(torch.float32)[None, :, :]  # C H W -> contains 0-40
         label = [label]

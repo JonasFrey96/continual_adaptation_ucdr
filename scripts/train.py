@@ -97,7 +97,7 @@ def train(exp_cfg_path):
     print(str(tg))
 
     # MODEL
-    model = Network(exp=exp, env=env)
+    model = Network(exp=exp, env=env, total_tasks=tg._total_tasks)
 
     # profiler
     if exp["trainer"].get("profiler", False) == "advanced":
@@ -156,9 +156,6 @@ def train(exp_cfg_path):
         train_dataloader, val_dataloaders, task_name = adapter_tg_to_dataloader(
             copy.deepcopy(tg), 1, exp["loader"], exp["replay"]["cfg_ensemble"], env
         )
-
-        print("train", len(train_dataloader.dataset.main_dataset))
-        print("val", len(val_dataloaders[1].dataset))
 
         train_dataloader, val_dataloaders, task_name = adapter_tg_to_dataloader(
             copy.deepcopy(tg), task_nr, exp["loader"], exp["replay"]["cfg_ensemble"], env
