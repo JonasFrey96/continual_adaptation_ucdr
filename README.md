@@ -16,7 +16,7 @@
 </p>
 
 # Overview
-
+```
 📦continual_adaptation_ucdr  
  ┣ 📂cfg                    # configuration
  ┃ ┣ 📂conda                   # conda enviornment file 
@@ -28,10 +28,10 @@
  ┃ ┗ 📂generate                # checkpoint to lables
  ┣ 📂docs                   # images for readme
  ┣ 📂results                # empty result folder
- ┃ ┣ 📂evals
- ┃ ┣ 📂labels_generated
- ┃ ┣ 📂learning
- ┣ 📂scripts
+ ┃ ┣ 📂evals                   # evaluation results
+ ┃ ┣ 📂labels_generated        # add here pregenerated pseudo labels
+ ┃ ┣ 📂learning                # add here pretrained model checkpoints
+ ┣ 📂scripts                # scripts
  ┃ ┣ 📜eval_model.py           # evaluation of model checkpoint
  ┃ ┣ 📜eval_pseudo_labels.py   # evaluation of folder containing pseudo labels
  ┃ ┣ 📜generate.py             # model checkpoint to lables
@@ -48,6 +48,7 @@
  ┃ ┣ 📂task
  ┃ ┣ 📂utils
  ┃ ┣ 📂visu
+```
 
 # Citation
 
