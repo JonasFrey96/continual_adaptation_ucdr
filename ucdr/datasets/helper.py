@@ -42,6 +42,7 @@ class AugmentationList:
         self._crop_center = tf.CenterCrop(self._output_size)
 
     def apply(self, img, label, only_crop=False):
+
         if only_crop:
             s = img.shape[2] / self._output_size[1]
             h = int(img.shape[1] / s)
@@ -77,10 +78,6 @@ class AugmentationList:
                     l[None], scale_factor=(sf, sf), mode="nearest", recompute_scale_factor=False
                 )[0]
 
-        if not only_crop:
-            # Color Jitter
-            img = self._jitter(img)
-
             # Rotate
             angle = random.uniform(-self._degrees, self._degrees)
             with warnings.catch_warnings():
@@ -96,15 +93,18 @@ class AugmentationList:
             for _i, l in enumerate(label):
                 label[_i] = F.crop(l, i, j, h, w)
 
+        # Performes center crop
+        img = self._crop_center(img)
+        for _i, l in enumerate(label):
+            label[_i] = self._crop_center(l)
+
+        if not only_crop:
             # Flip
             if torch.rand(1) < self._flip_p:
                 img = F.hflip(img)
                 for _i, l in enumerate(label):
                     label[_i] = F.hflip(l)
-
-        # Performes center crop
-        img = self._crop_center(img)
-        for _i, l in enumerate(label):
-            label[_i] = self._crop_center(l)
+            # Color Jitter
+            img = self._jitter(img)
 
         return img, label

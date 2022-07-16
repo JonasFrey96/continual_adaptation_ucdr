@@ -163,7 +163,6 @@ class Network(LightningModule):
             # Allows to skip training step.
             # This happens if all data within the training batch is invalid.
             return None
-
         outputs = self(batch=ba["images"])
         if not ("aux_valid" in ba.keys()):
             ba["aux_valid"] = torch.zeros((ba["images"].shape[0]), device=ba["images"].device, dtype=torch.bool)

@@ -7,10 +7,9 @@ checkpoint_restore: false
 checkpoint_load: pred2/scene0004_r02/task1-last.ckpt
 lr: 0.05
 tag_list:
-- scannet
-- pretrain_25k
-- half_res
-- self_supervised
+  - scannet
+  - continual_learning
+  - iteration_3
 supervisor:
   start_task: 1
   stop_task: 2
